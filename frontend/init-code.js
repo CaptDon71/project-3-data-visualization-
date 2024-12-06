@@ -30,9 +30,6 @@ for (let index = 1; index <= 6; index++) {
     const textObject = document.getElementById(`graph-${index}-text`);
     const graphDesc = graphDescriptions[`graph${index}`];
 
-    console.log(titleObject);
-    console.log(textObject)
-
     titleObject.textContent = graphDesc.title;
     textObject.textContent = graphDesc.text;
 }
