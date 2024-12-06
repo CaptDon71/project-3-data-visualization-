@@ -1,0 +1,148 @@
+body {
+    /* Standard values for the whole webapp */
+    /* Color Vars */
+    /* Palette source - https://colorhunt.co/palette/89a8b2b3c8cfe5e1daf1f0e8 */
+    --background-color : #F1F0E8;
+    --emphasis-color-1 : #89A8B2;
+    --emphasis-color-2 : #B3C8CF;
+    --emphasis-color-3 : #E5E1DA;
+
+    /* General Spacing Variables */
+    --small-hor-space : 0.5vw;
+    --medium-hor-space : 1vw;
+    --large-hor-space : 2vw;
+
+    --small-ver-space : 1vh;
+    --medium-ver-space : 2vh;
+    --large-ver-space : 3vh;
+
+    /* Page sizing variables */
+    --body-height : fit-content;
+    --footer-height : 10vh;
+
+    /* Information selector properties */
+    --selector-height : 80vh;
+    --selector-width : 25vw;
+
+    /* Graph Container Properties */
+    --graph-container-width : calc(100vw - (var(--selector-width) + 3 * var(--medium-hor-space)));
+
+    /* Graph wrapper properties */
+    --graph-wrapper-height : 45vh;
+    --graph-wrapper-width : 35vw; 
+
+    /* Graph properties */
+    --graph-height : calc(var(--graph-wrapper-height) - 4vh);
+    
+    /* Default text properties */
+    .header-text {
+        text-align : center;
+        margin : 0 0 0 0;
+    }
+
+    .standard-text {
+        text-align : center;
+        margin : 0 0 0 0;
+    }
+
+    .link-text {
+        color : rgb(92, 92, 92);
+    }
+
+    /* Removing standard body margin */
+    margin : 0 0 0 0;
+}
+
+.body-wrapper {
+    /* Sizing Information */
+    height : var(--body-height);
+    padding : var(--medium-ver-space) 0;
+
+    /* Content Placement Information */
+    align-items : center;
+    display : flex;
+    flex-direction : row;
+
+    background-color : var(--background-color);
+
+    .selector {
+        /* Sizing Information */
+        height : var(--selector-height);
+        width : var(--selector-width);
+        margin : var(--medium-ver-space) 0 var(--medium-ver-space) var(--medium-hor-space);
+
+        /* Content Placement Information */
+        padding : var(--large-ver-space) var(--medium-hor-space); 
+
+        /* Shape And Color Information */
+        border-radius : 20px;
+        background-color : var(--emphasis-color-1);
+    }
+
+    .graph-container {
+        /* Sizing Information */
+        height : fit-content;
+        width : var(--graph-container-width);
+        margin : var(--medium-ver-space) var(--medium-hor-space);
+
+        .graph-row {
+            /* Content Placement Information */
+            display : flex;
+            flex-direction : row;
+        }
+    }
+}
+
+.graph-wrapper {
+    /* Sizing Information */
+    height : var(--graph-wrapper-height);
+    width : var(--graph-wrapper-width);
+    margin : var(--small-ver-space) var(--medium-hor-space);
+
+    /* Content Placement Information */
+    align-content : center;
+
+    /* Shape And Color Information */
+    background-color : var(--emphasis-color-2);
+    border-radius : 10px;
+
+    .graph {
+        /* Sizing Information */
+        height : var(--graph-height);
+        width : var(--graph-height);
+        margin : 0 var(--medium-ver-space);
+
+        /* Shape And Color Information */
+        background-color : red;
+    }
+}
+
+.footer-wrapper {
+    /* Sizing Information */
+    height : var(--footer-height);
+
+    /* Shape And Color Information */
+    background-color : var(--background-color);
+
+    .footer-content {
+        /* Sizing Information */
+        width : 80vw;
+        padding : 20px;
+        margin : 0 auto;
+
+        /* Content Placement Information */
+        align-items : center;
+        justify-content : center;
+
+        /* Border Information */
+        border-top : 1px solid black;
+
+        .git-wrapper {
+            /* Sizing Information */
+            width : 100%;
+
+            /* Content Placement Information */
+            text-align : center;
+        }
+    }
+}
