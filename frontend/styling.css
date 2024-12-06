@@ -17,18 +17,19 @@ body {
     --large-ver-space : 3vh;
 
     /* Page sizing variables */
-    --body-height : fit-content;
+    --body-height : 100vh;
     --footer-height : 10vh;
 
     /* Information selector properties */
     --selector-height : 80vh;
-    --selector-width : 25vw;
+    --selector-width : 20vw;
 
     /* Graph Container Properties */
-    --graph-container-width : calc(100vw - (var(--selector-width) + 3 * var(--medium-hor-space)));
+    --graph-container-height : 90vh;
+    --graph-container-width : calc(100vw - var(--selector-width) - (2 * var(--medium-hor-space)) - 6vw);
 
     /* Graph wrapper properties */
-    --graph-wrapper-height : 45vh;
+    --graph-wrapper-height : 28vh;
     --graph-wrapper-width : 35vw; 
 
     /* Graph properties */
@@ -56,7 +57,6 @@ body {
 .body-wrapper {
     /* Sizing Information */
     height : var(--body-height);
-    padding : var(--medium-ver-space) 0;
 
     /* Content Placement Information */
     align-items : center;
@@ -69,10 +69,10 @@ body {
         /* Sizing Information */
         height : var(--selector-height);
         width : var(--selector-width);
-        margin : var(--medium-ver-space) 0 var(--medium-ver-space) var(--medium-hor-space);
+        margin : 0 var(--medium-hor-space);
 
         /* Content Placement Information */
-        padding : var(--large-ver-space) var(--medium-hor-space); 
+        padding : var(--medium-ver-space) var(--medium-hor-space);
 
         /* Shape And Color Information */
         border-radius : 20px;
@@ -81,15 +81,16 @@ body {
 
     .graph-container {
         /* Sizing Information */
-        height : fit-content;
+        height : var(--graph-container-height);
         width : var(--graph-container-width);
-        margin : var(--medium-ver-space) var(--medium-hor-space);
+        margin : 0 var(--medium-hor-space);
 
-        .graph-row {
-            /* Content Placement Information */
-            display : flex;
-            flex-direction : row;
-        }
+        /* Content Placement Information */
+        display : flex;
+        flex-direction : row;
+        flex-wrap : wrap;
+        justify-content : space-evenly;
+        z-index : 0;
     }
 }
 
@@ -97,14 +98,30 @@ body {
     /* Sizing Information */
     height : var(--graph-wrapper-height);
     width : var(--graph-wrapper-width);
-    margin : var(--small-ver-space) var(--medium-hor-space);
 
     /* Content Placement Information */
-    align-content : center;
+    display : flex;
+    flex-direction : row;
+    align-items : center;
 
     /* Shape And Color Information */
     background-color : var(--emphasis-color-2);
     border-radius : 10px;
+
+    p {
+        height : calc(var(--graph-height) - (2 * var(--medium-ver-space)));
+        width : calc(var(--graph-wrapper-width) - var(--graph-height) - (4 * var(--medium-hor-space)));
+
+        overflow : hidden;
+
+        margin : 0 0 0 0;
+    }
+
+    h3 {
+        height : calc(2 * var(--medium-hor-space));
+
+        margin : 0 0 0 0;
+    }
 
     .graph {
         /* Sizing Information */
@@ -112,10 +129,79 @@ body {
         width : var(--graph-height);
         margin : 0 var(--medium-ver-space);
 
-        /* Shape And Color Information */
         background-color : red;
     }
 }
+
+#graph-wrapper-active {
+    /* Content Placement Information */
+    z-index : 100;
+
+    animation-duration: 1s;
+    animation-name: graph-wrapper-active;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes graph-wrapper-active {
+    0% {}
+    100% {
+        height : var(--graph-container-height);
+        width : var(--graph-container-width);
+        left : calc(var(--selector-width) + (4 * var(--medium-hor-space)));
+        top : 5vh;
+    }
+}
+
+#leaflet-wrapper {
+    /* Sizing Information */
+    height : calc(var(--graph-container-height) - 4 * var(--medium-ver-space));
+    width : calc(var(--graph-container-width) - (2 * var(--medium-hor-space)));
+
+    /* Shape And Color Information */
+    border-radius : 20px;
+}
+
+#graph-view {
+    flex-direction : column;
+}
+
+#leaflet-view {
+    /* Shape And Color Information */
+    background-color : var(--emphasis-color-2);
+    border-radius : 20px;
+
+    /* Content Placement Information */
+    display : none;
+    justify-content : center;
+    align-items : center;
+}
+
+.animation-cover {
+    /* Sizing Information */
+    height : var(--graph-container-height);
+
+    /* Shape And Color Information */
+    background-color: var(--background-color);
+
+    /* Content Placement Information */
+    position : absolute;
+    left : calc(var(--selector-width) + 4 * var(--medium-hor-space));
+    z-index : 10000;
+}
+
+#animation-cover-active {
+    animation-name: animation-cover-active;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+}
+
+@keyframes animation-cover-active {
+    0%    { width : 0vw;                          }
+    50%   { width : calc(var(--graph-container-width) + (2 * var(--medium-hor-space))); }
+    100%  { width : 0vw;                          }    
+}
+
 
 .footer-wrapper {
     /* Sizing Information */
@@ -127,7 +213,7 @@ body {
     .footer-content {
         /* Sizing Information */
         width : 80vw;
-        padding : 20px;
+        padding : 2vh;
         margin : 0 auto;
 
         /* Content Placement Information */

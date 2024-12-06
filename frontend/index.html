@@ -1,7 +1,7 @@
 <html>
     <head>
-        <!-- Stylesheet Import -->
-        <link rel="stylesheet" type="text/css" href="styling.css">
+        <!-- Frontend JS Files-->
+        <script src="./frontend-functionality.js"></script>
 
         <!-- Graph Generating JS Imports -->
         <script src="./../logic.js"></script>
@@ -14,30 +14,63 @@
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
         <!-- Adding the functionality for D3 using JavaScript -->
-        <script src="//d3js.org/d3.v3.min.js"></script>
+        <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+        <!-- Stylesheet Import -->
+        <link rel="stylesheet" type="text/css" href="styling.css">
     </head>
     <body>
         <div class="body-wrapper">
-            <div class="selector">
+            <div class="selector" onclick="containerSwap(refreshMap)">
                 <h2 class="header-text">Bird Strikes in Aviation: Analyzing Aircraft Collisions with Birds to Enhance Aviation Safety</h2>
             </div>
-            <div class="graph-container">
-                <div class="graph-row">
-                    <div class="graph-wrapper">
-                        <div class="graph" id="graph1"></div>
-                    </div>
-                    <div class="graph-wrapper">
-                        <div class="graph" id="graph2"></div>
-                    </div>
-                </div>
-                <div class="graph-row">
-                    <div class="graph-wrapper">
-                        <div class="graph" id="graph3"></div>
-                    </div>
-                    <div class="graph-wrapper">
-                        <div class="graph" id="graph4"></div>
+            <div class="animation-cover"></div>
+            <div class="graph-container" id="graph-view">
+                <div class="graph-wrapper" id="graphWrapper1" onclick="graphSelected(event)">
+                    <div class="graph" id="graph1" ></div>
+                    <div class="graph-description" id="graph-1-description">
+                        <h3 class="graph-title" id="graph-1-title"></h3>
+                        <p class="graph-text" id="graph-1-text"></p>
                     </div>
                 </div>
+                <div class="graph-wrapper" id="graphWrapper2" onclick="graphSelected(event)">
+                    <div class="graph" id="graph2"></div>
+                    <div class="graph-description" id="graph-2-description">
+                        <h3 class="graph-title" id="graph-2-title"></h3>
+                        <p class="graph-text" id="graph-2-text"></p>
+                    </div>
+                </div>
+                <div class="graph-wrapper" id="graphWrapper3" onclick="graphSelected(event)">
+                    <div class="graph" id="graph3"></div>
+                    <div class="graph-description" id="graph-3-description">
+                        <h3 class="graph-title" id="graph-3-title"></h3>
+                        <p class="graph-text" id="graph-3-text"></p>
+                    </div>
+                </div>
+                <div class="graph-wrapper" id="graphWrapper4" onclick="graphSelected(event)">
+                    <div class="graph" id="graph4"></div>
+                    <div class="graph-description" id="graph-4-description">
+                        <h3 class="graph-title" id="graph-4-title"></h3>
+                        <p class="graph-text" id="graph-4-text"></p>
+                    </div>
+                </div>
+                <div class="graph-wrapper" id="graphWrapper5" onclick="graphSelected(event)">
+                    <div class="graph" id="graph5"></div>
+                    <div class="graph-description" id="graph-5-description">
+                        <h3 class="graph-title" id="graph-5-title"></h3>
+                        <p class="graph-text" id="graph-5-text"></p>
+                    </div>
+                </div>
+                <div class="graph-wrapper" id="graphWrapper6" onclick="graphSelected(event)">
+                    <div class="graph" id="graph6"></div>
+                    <div class="graph-description" id="graph-6-description">
+                        <h3 class="graph-title" id="graph-6-title"></h3>
+                        <p class="graph-text" id="graph-6-text"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="graph-container" id="leaflet-view">
+                <div id="leaflet-wrapper"></div>
             </div>
         </div>
         <div class="footer-wrapper">
@@ -48,5 +81,7 @@
                 </div>
             </div>
         </div>
+        <script src="./../leaflet-map.js"></script>
+        <script src="./init-code.js"></script>
     </body>
 </html>
