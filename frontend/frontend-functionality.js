@@ -1,4 +1,5 @@
 let viewType = "graph-view";
+let processRunning = false;
 const animationTime = 1000;
 let selectedGraphWrapper = ""
 let selectedGraph = ""
@@ -10,9 +11,21 @@ function containerSwap(refreshFunction) {
     const graphContainerElement = document.getElementById("graph-view")
     const leafletContainerElement = document.getElementById("leaflet-view")
     const animationCover = document.getElementsByClassName("animation-cover")[0];
+    const switchShuttle = document.getElementsByClassName("view-switch-shuttle")[0];
+    const switchGutter = document.getElementsByClassName("view-switch-gutter")[0];
 
-    if (viewType === "graph-view") {
+    if (!processRunning && viewType === "graph-view") {
         animationCover.id = "animation-cover-active"
+        switchShuttle.id = "view-switch-shuttle-active"
+
+        switchShuttle.style.position = 'absolute';
+
+        processRunning = true;
+
+        setTimeout(() => {
+            switchGutter.id = 'view-switch-gutter-active'
+        }, 125)
+
 
         setTimeout(() => {
             graphContainerElement.style.display = "none";
@@ -23,19 +36,31 @@ function containerSwap(refreshFunction) {
 
         setTimeout(() => {
             animationCover.id = "";
+            processRunning = false;
         }, animationTime * 2)
     }
-    else {
+    else if (!processRunning) {
         animationCover.id = "animation-cover-active"
+        switchShuttle.id = "view-switch-shuttle-inactive"
+
+        processRunning = true;
+
+        setTimeout(() => {
+            switchGutter.id = ''
+        }, 125)
 
         setTimeout(() => {
             leafletContainerElement.style.display = "none";
             graphContainerElement.style.display = "flex";
+            switchShuttle.style.position = '';
             viewType = "graph-view"
         }, animationTime);
 
         setTimeout(() => {
             animationCover.id = "";
+            switchShuttle.id = "";
+
+            processRunning = false;
         }, animationTime * 2)
     }
 }
@@ -49,7 +74,6 @@ function graphSelected(event) {
     const graphId = targetGraph.id;
     const descId = targetGraphDesc.id;
 
-    console.log(targetGraphDesc)
 
     if (targetId === "graph-wrapper-active") {
         const animationCover = document.getElementsByClassName("animation-cover")[0];

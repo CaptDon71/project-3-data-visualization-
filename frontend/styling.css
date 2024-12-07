@@ -26,7 +26,7 @@ body {
 
     /* View Switch Properties */
     --view-switch-width : 3.5vw;
-    --view-switch-height : 4vh;
+    --view-switch-height : 4.5vh;
     --view-switch-shuttle-dim : 3vh;
 
     /* Graph Container Properties */
@@ -115,15 +115,51 @@ body {
     padding : 0 var(--small-hor-space);
 
     /* Shape And Color Information */
-    background-color : var(--emphasis-color-2);
+    background-color : var(--emphasis-color-3);
     border-radius : calc(var(--view-switch-height) / 2);
+}
 
-    .view-switch-shuttle {
-        height : var(--view-switch-shuttle-dim);
-        width : var(--view-switch-shuttle-dim);
-        
-        background-color : white;
-        border-radius : calc(var(--view-switch-shuttle-dim) / 2);
+#view-switch-gutter-active {
+    background-color : var(--emphasis-color-2);
+}
+
+.view-switch-shuttle {
+    height : var(--view-switch-shuttle-dim);
+    width : var(--view-switch-shuttle-dim);
+    
+    background-color : white;
+    border-radius : calc(var(--view-switch-shuttle-dim) / 2);
+}
+
+#view-switch-shuttle-active {
+    animation-name : view-switch-shuttle-active;
+    animation-duration : 0.25s;
+    animation-iteration-count: 1;
+    animation-fill-mode : forwards;
+}
+
+@keyframes view-switch-shuttle-active {
+    0% {
+        left : 10.25vw;
+    }
+    100% {
+        left : 12.25vw;
+    }
+}
+
+#view-switch-shuttle-inactive {
+    animation-name : view-switch-shuttle-inactive;
+    animation-duration : 0.25s;
+    animation-iteration-count: 1;
+    animation-fill-mode : forwards;
+}
+
+@keyframes view-switch-shuttle-inactive {
+    0% {
+        left : 12.25vw;
+    }
+    100% {
+        left : 10.25vw;
     }
 }
 
