@@ -119,6 +119,10 @@ body {
     border-radius : calc(var(--view-switch-height) / 2);
 }
 
+.view-switch-gutter:hover {
+    cursor : pointer;
+}
+
 #view-switch-gutter-active {
     background-color : var(--emphasis-color-2);
 }

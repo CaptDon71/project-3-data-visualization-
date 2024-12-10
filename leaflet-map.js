@@ -31,9 +31,9 @@ d3.json(strike_count_url).then((data) => {
     }
 
     const tileLayer = L.tileLayer(
-        'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
-        { attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' }
-    );
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    });
 
     tileLayer.addTo(map);
 
