@@ -1,14 +1,16 @@
 const htmlSelector = "leaflet-wrapper";
-const usCenter = [39.8283, -98.5795];
-const zoom = 4;
 
+state_info_url = 'http://127.0.0.1:5000/state_center_zoom'
 strike_count_url = 'http://127.0.0.1:5000/strikes-by-airport'
 
-const map = L.map(
+const init_center = [39.8283, -98.5795]
+const init_zoom = 4
+
+let map = L.map(
     htmlSelector,
     {
-        center : usCenter,
-        zoom : zoom
+        center : init_center,
+        zoom : init_zoom
     }
 )
 
@@ -42,6 +44,16 @@ d3.json(strike_count_url).then((data) => {
     group.addTo(map)
 })
 
+function updateMapLocation() {
+    d3.json(state_info_url).then((state_data) => {
+
+        const center = [state_data[0], state_data[1]];
+        const zoom = state_data[2];
+        
+        map.flyTo(center, zoom)
+    })
+}
+
 function refreshMap() {
-    map.invalidateSize();
+    map.invalidateSize()
 }

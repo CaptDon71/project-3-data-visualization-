@@ -2,6 +2,7 @@
     <head>
         <!-- Frontend JS Files-->
         <script src="./frontend-functionality.js"></script>
+        <script src="./selector-functionality.js"></script>
 
         <!-- Graph Generating JS Imports -->
         <script src="./../logic.js"></script>
@@ -23,10 +24,28 @@
         <div class="body-wrapper">
             <div class="selector">
                 <h2 class="header-text">Bird Strikes in Aviation: Analyzing Aircraft Collisions with Birds to Enhance Aviation Safety</h2>
-                <div class="view-switch-gutter" onclick="containerSwap(refreshMap)">
-                    <div class="view-switch-shuttle">
-                        
+                <div class="dropdown-wrapper">
+                    <div class="dropdown-title-wrapper" id="title-wrapper-1">
+                        <h3 id="dropdown-title-1"></h3>
+                        <select class="dropdown" id="dropdown1" onchange="onSelectorChange(event, updateMapLocation)"></select>
                     </div>
+                    <div class="dropdown-title-wrapper" id="title-wrapper-2">
+                        <h3 id="dropdown-title-2">Dropdown2</h3>
+                        <select class="dropdown" id="dropdown2">
+                            <option class="dropdown-option" id="option-2-1" value="option21">option21</option>
+                            <option class="dropdown-option" id="option-2-2" value="option22">option22</option>
+                        </select>
+                    </div>
+                    <div class="dropdown-title-wrapper" id="title-wrapper-3">
+                        <h3 id="dropdown-title-3">Dropdown3</h3>
+                        <select class="dropdown" id="dropdown3">
+                            <option class="dropdown-option" id="option-3-1" value="option31">option31</option>
+                            <option class="dropdown-option" id="option-3-2" value="option32">option32</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="view-switch-gutter" onclick="containerSwap(refreshMap)">
+                    <div class="view-switch-shuttle"></div>
                 </div>
             </div>
             <div class="animation-cover"></div>

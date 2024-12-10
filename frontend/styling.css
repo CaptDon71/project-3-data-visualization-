@@ -29,6 +29,14 @@ body {
     --view-switch-height : 4.5vh;
     --view-switch-shuttle-dim : 3vh;
 
+    /* Dropdown Wrapper Properties */
+    --dropdown-wrapper-height : 37.5vh;
+    --dropdown-wrapper-width : 16vw;
+
+    /* Dropdown Menu Properties */
+    --dropdown-height : 7.5vh;
+    --dropdown-width : 16vw;
+
     /* Graph Container Properties */
     --graph-container-height : 90vh;
     --graph-container-width : calc(100vw - var(--selector-width) - (2 * var(--medium-hor-space)) - 6vw);
@@ -113,6 +121,7 @@ body {
     flex-direction : row;
     align-items : center;
     padding : 0 var(--small-hor-space);
+    margin-top : 5vh;
 
     /* Shape And Color Information */
     background-color : var(--emphasis-color-3);
@@ -165,6 +174,35 @@ body {
     100% {
         left : 10.25vw;
     }
+}
+
+.dropdown-wrapper {
+    /* Sizing Information */
+    height : var(--dropdown-wrapper-height);
+    width : var(--dropdown-wrapper-width);
+
+    /* Content Placement Information */
+    display : flex;
+    flex-direction : column;
+    justify-content : space-between;
+}
+
+.dropdown-title-wrapper {
+
+    h3 {
+        margin : 0 0;
+        text-align : center;
+    }
+}
+
+.dropdown {
+    /* Sizing Information */
+    height : var(--dropdown-height);
+    width : var(--dropdown-width);
+
+    /* Shape And Color Information */
+    background-color : var(--emphasis-color-3);
+    border-radius : 10px;
 }
 
 .graph-wrapper {
