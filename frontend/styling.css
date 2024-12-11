@@ -203,6 +203,7 @@ body {
     /* Shape And Color Information */
     background-color : var(--emphasis-color-3);
     border-radius : 10px;
+    text-align : center;
 }
 
 .graph-wrapper {

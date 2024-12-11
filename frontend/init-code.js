@@ -35,7 +35,7 @@ for (let index = 1; index <= 6; index++) {
 }
 
 dropdown_title_1 = "States"
-dropdown_title_2 = "Placeholder2"
+dropdown_title_2 = "Airport Limit"
 dropdown_title_3 = "Placeholder3"
 
 document.getElementById("dropdown-title-1").textContent = dropdown_title_1
@@ -98,11 +98,34 @@ const dropdown_1_values = {
 
 const dropdown1 = document.getElementById("dropdown1")
 
-for (state of Object.keys(dropdown_1_values)){
+for (state of Object.keys(dropdown_1_values)) {
     const dropdown_option = document.createElement("option")
     dropdown_option.class = "dropdown-option"
     dropdown_option.value = state
     dropdown_option.text = state
 
     dropdown1.add(dropdown_option)
+}
+
+const dropdown_2_values = [
+    "All Airports",
+    10,
+    25,
+    50,
+    100,
+    500,
+    1000,
+    1500
+]
+
+const dropdown2 = document.getElementById("dropdown2")
+
+for (limit of dropdown_2_values) {
+    const dropdown_option = document.createElement("option")
+
+    dropdown_option.class = "dropdown-option"
+    dropdown_option.value = limit
+    dropdown_option.text = limit
+
+    dropdown2.add(dropdown_option)
 }

@@ -14,6 +14,8 @@ let map = L.map(
     }
 )
 
+let bubbleGroup = {}
+
 // Insert Bubble Layers Here
 d3.json(strike_count_url).then((data) => {
     const bubbleArray = []
@@ -39,9 +41,9 @@ d3.json(strike_count_url).then((data) => {
 
     tileLayer.addTo(map);
 
-    const group = L.layerGroup(bubbleArray)
+    bubbleGroup = L.layerGroup(bubbleArray)
 
-    group.addTo(map)
+    bubbleGroup.addTo(map)
 })
 
 function updateMapLocation() {
@@ -51,6 +53,32 @@ function updateMapLocation() {
         const zoom = state_data[2];
         
         map.flyTo(center, zoom)
+    })
+}
+
+function updateMapBubbles() {
+    map.removeLayer(bubbleGroup)
+
+    d3.json(strike_count_url).then((data) => {
+        const bubbleArray = []
+    
+        for (strike of data) {
+            const bubble = L.circle([strike["latitude"], strike["longitude"]], {
+                color : "black",
+                weight : 2,
+                fillColor : "lime",
+                fillOpacity : 0.75,
+                radius : strike["strike_count"] * 25
+            })
+    
+            bubble.bindPopup(strike["airport_name"])
+    
+            bubbleArray.push(bubble)
+        }
+        
+        bubbleGroup = L.layerGroup(bubbleArray)
+    
+        bubbleGroup.addTo(map)
     })
 }
 
