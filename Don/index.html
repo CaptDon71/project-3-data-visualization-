@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aircraft Incident Chart</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <!-- Adding the functionality for D3 using JavaScript -->
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+
+</head>
+<body>
+  <select id="aircraftFilter">
+    <option value="A-C">A-C</option>
+    <option value="D-F">D-F</option>
+    <option value="G-I">G-I</option>
+    <option value="J-L">J-L</option>
+    <option value="M-O">M-O</option>
+    <option value="P-R">P-R</option>
+    <option value="S-U">S-U</option>
+    <option value="V-Z">V-Z</option>
+  </select>
+  <canvas id="myChart" width="400" height="200"></canvas>
+  <script src="plots.js"></script>
+</body>
+</html>
+
