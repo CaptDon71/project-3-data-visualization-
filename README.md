@@ -6,6 +6,9 @@ Bird Strikes in Aviation: Analyzing Aircraft Collisions with Birds to Enhance Av
 ---
 Bird strikes pose a significant threat to aviation safety, with potential risks to both aircraft operations and human life. This project aims to analyze bird strike data to better understand the frequency, causes, and impact of bird collisions with aircraft, with the ultimate goal of enhancing aviation safety. By leveraging data analysis techniques, the project seeks to identify trends and patterns in bird strike incidents.
 
+**Instructions**
+---
+Add instructions on how to use and interact with this project
 
 **Ethical Considerations**
 ---
