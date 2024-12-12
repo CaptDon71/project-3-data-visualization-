@@ -1,3 +1,9 @@
+const initSelector1URL = "http://127.0.0.1:5000/update_selected_area/All%20States"
+const initSelector2URL = "http://127.0.0.1:5000/update_airport_limit/All%20Airports"
+
+fetch(initSelector1URL)
+fetch(initSelector2URL)
+
 const graphDescriptions = {
     "graph1" : {
         "title" : "Placeholder Title",
@@ -10,22 +16,10 @@ const graphDescriptions = {
     "graph3" : {
         "title" : "Placeholder Title",
         "text" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in velit sed augue lacinia accumsan in eget augue. Mauris lacus urna, viverra eu porttitor in, varius et tellus. Mauris elementum rhoncus arcu, et pretium est euismod in. Morbi eu facilisis orci. Praesent id dolor nisi. Ut sodales leo quis convallis dapibus. Curabitur eget vulputate ante. Duis sapien ligula, ullamcorper nec nunc nec, efficitur efficitur sem. Duis vel risus ut nibh accumsan vestibulum. Phasellus porttitor eros enim, sed aliquam augue accumsan ut. Aliquam sollicitudin sem id risus euismod volutpat. Proin hendrerit est at laoreet venenatis. Cras ultricies orci varius orci interdum, nec eleifend ex porta. Fusce viverra tempus risus id iaculis. Phasellus sollicitudin venenatis condimentum. Aenean ut ultrices neque, vitae vestibulum massa."
-    },
-    "graph4" : {
-        "title" : "Placeholder Title",
-        "text" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in velit sed augue lacinia accumsan in eget augue. Mauris lacus urna, viverra eu porttitor in, varius et tellus. Mauris elementum rhoncus arcu, et pretium est euismod in. Morbi eu facilisis orci. Praesent id dolor nisi. Ut sodales leo quis convallis dapibus. Curabitur eget vulputate ante. Duis sapien ligula, ullamcorper nec nunc nec, efficitur efficitur sem. Duis vel risus ut nibh accumsan vestibulum. Phasellus porttitor eros enim, sed aliquam augue accumsan ut. Aliquam sollicitudin sem id risus euismod volutpat. Proin hendrerit est at laoreet venenatis. Cras ultricies orci varius orci interdum, nec eleifend ex porta. Fusce viverra tempus risus id iaculis. Phasellus sollicitudin venenatis condimentum. Aenean ut ultrices neque, vitae vestibulum massa."
-    },
-    "graph5" : {
-        "title" : "Placeholder Title",
-        "text" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in velit sed augue lacinia accumsan in eget augue. Mauris lacus urna, viverra eu porttitor in, varius et tellus. Mauris elementum rhoncus arcu, et pretium est euismod in. Morbi eu facilisis orci. Praesent id dolor nisi. Ut sodales leo quis convallis dapibus. Curabitur eget vulputate ante. Duis sapien ligula, ullamcorper nec nunc nec, efficitur efficitur sem. Duis vel risus ut nibh accumsan vestibulum. Phasellus porttitor eros enim, sed aliquam augue accumsan ut. Aliquam sollicitudin sem id risus euismod volutpat. Proin hendrerit est at laoreet venenatis. Cras ultricies orci varius orci interdum, nec eleifend ex porta. Fusce viverra tempus risus id iaculis. Phasellus sollicitudin venenatis condimentum. Aenean ut ultrices neque, vitae vestibulum massa."
-    },
-    "graph6" : {
-        "title" : "Placeholder Title",
-        "text" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in velit sed augue lacinia accumsan in eget augue. Mauris lacus urna, viverra eu porttitor in, varius et tellus. Mauris elementum rhoncus arcu, et pretium est euismod in. Morbi eu facilisis orci. Praesent id dolor nisi. Ut sodales leo quis convallis dapibus. Curabitur eget vulputate ante. Duis sapien ligula, ullamcorper nec nunc nec, efficitur efficitur sem. Duis vel risus ut nibh accumsan vestibulum. Phasellus porttitor eros enim, sed aliquam augue accumsan ut. Aliquam sollicitudin sem id risus euismod volutpat. Proin hendrerit est at laoreet venenatis. Cras ultricies orci varius orci interdum, nec eleifend ex porta. Fusce viverra tempus risus id iaculis. Phasellus sollicitudin venenatis condimentum. Aenean ut ultrices neque, vitae vestibulum massa."
     }
 }
 
-for (let index = 1; index <= 6; index++) {
+for (let index = 1; index <= 3; index++) {
     const titleObject = document.getElementById(`graph-${index}-title`);
     const textObject = document.getElementById(`graph-${index}-text`);
     const graphDesc = graphDescriptions[`graph${index}`];
@@ -36,11 +30,9 @@ for (let index = 1; index <= 6; index++) {
 
 dropdown_title_1 = "States"
 dropdown_title_2 = "Airport Limit"
-dropdown_title_3 = "Placeholder3"
 
 document.getElementById("dropdown-title-1").textContent = dropdown_title_1
 document.getElementById("dropdown-title-2").textContent = dropdown_title_2
-document.getElementById("dropdown-title-3").textContent = dropdown_title_3
 
 const dropdown_1_values = {
     "All States" : [39.8283, -98.5795,  4],
@@ -109,13 +101,13 @@ for (state of Object.keys(dropdown_1_values)) {
 
 const dropdown_2_values = [
     "All Airports",
-    10,
-    25,
-    50,
-    100,
-    500,
+    1500,
     1000,
-    1500
+    500,
+    100,
+    50,
+    25,
+    10
 ]
 
 const dropdown2 = document.getElementById("dropdown2")
@@ -129,3 +121,4 @@ for (limit of dropdown_2_values) {
 
     dropdown2.add(dropdown_option)
 }
+

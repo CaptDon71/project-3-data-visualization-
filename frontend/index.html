@@ -4,9 +4,6 @@
         <script src="./frontend-functionality.js"></script>
         <script src="./selector-functionality.js"></script>
 
-        <!-- Graph Generating JS Imports -->
-        <script src="./../logic.js"></script>
-
         <!-- Library Imports -->
         <!-- Adding the Leaflet style sheet -->
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
@@ -16,6 +13,12 @@
 
         <!-- Adding the functionality for Leaflet using JavaScript -->
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+        <!-- Adding Charts.js Support -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <!-- Adding Plotly Support -->
+        <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
 
         <!-- Stylesheet Import -->
         <link rel="stylesheet" type="text/css" href="styling.css">
@@ -27,66 +30,50 @@
                 <div class="dropdown-wrapper">
                     <div class="dropdown-title-wrapper" id="title-wrapper-1">
                         <h3 id="dropdown-title-1"></h3>
-                        <select class="dropdown" id="dropdown1" onchange="onSelector1Change(event, updateMapLocation, updateMapBubbles)"></select>
+                        <select class="dropdown" id="dropdown1" onchange="onSelector1Change(event, updateMapLocation, updateMapBubbles, populateGraph1, populateGraph2, populateGraph3)"></select>
                     </div>
                     <div class="dropdown-title-wrapper" id="title-wrapper-2">
                         <h3 id="dropdown-title-2"></h3>
-                        <select class="dropdown" id="dropdown2" onchange="onSelector2Change(event, updateMapBubbles)"></select>
-                    </div>
-                    <div class="dropdown-title-wrapper" id="title-wrapper-3">
-                        <h3 id="dropdown-title-3"></h3>
-                        <select class="dropdown" id="dropdown3">
-                            <option class="dropdown-option" id="option-3-1" value="option31">option31</option>
-                            <option class="dropdown-option" id="option-3-2" value="option32">option32</option>
-                        </select>
+                        <select class="dropdown" id="dropdown2" onchange="onSelector2Change(event, updateMapBubbles, populateGraph1, populateGraph2, populateGraph3)"></select>
                     </div>
                 </div>
-                <div class="view-switch-gutter" onclick="containerSwap(refreshMap)">
+                <div class="view-switch-gutter" onclick="containerSwap(refreshMap, populateGraph1, populateGraph2, populateGraph3)">
                     <div class="view-switch-shuttle"></div>
                 </div>
             </div>
             <div class="animation-cover"></div>
             <div class="graph-container" id="graph-view">
-                <div class="graph-wrapper" id="graphWrapper1" onclick="graphSelected(event)">
-                    <div class="graph" id="graph1" ></div>
+                <div class="graph-wrapper" id="graphWrapper1">
+                    <div class="graph" id="graph1" onclick="graphSelected(event, populateGraph1, resizeGraph2, populateGraph3)">
+                        <canvas class="graphCanvas"></canvas>
+                    </div>
                     <div class="graph-description" id="graph-1-description">
                         <h3 class="graph-title" id="graph-1-title"></h3>
                         <p class="graph-text" id="graph-1-text"></p>
+                        <select class="dropdown aircraftFilter" id="">
+                            <option value="A-C">A-C</option>
+                            <option value="D-F">D-F</option>
+                            <option value="G-I">G-I</option>
+                            <option value="J-L">J-L</option>
+                            <option value="M-O">M-O</option>
+                            <option value="P-R">P-R</option>
+                            <option value="S-U">S-U</option>
+                            <option value="V-Z">V-Z</option>
+                          </select>
                     </div>
                 </div>
-                <div class="graph-wrapper" id="graphWrapper2" onclick="graphSelected(event)">
-                    <div class="graph" id="graph2"></div>
+                <div class="graph-wrapper" id="graphWrapper2">
+                    <div class="graph" id="graph2" onclick="graphSelected(event, populateGraph1, resizeGraph2, populateGraph3)"></div>
                     <div class="graph-description" id="graph-2-description">
                         <h3 class="graph-title" id="graph-2-title"></h3>
                         <p class="graph-text" id="graph-2-text"></p>
                     </div>
                 </div>
-                <div class="graph-wrapper" id="graphWrapper3" onclick="graphSelected(event)">
-                    <div class="graph" id="graph3"></div>
+                <div class="graph-wrapper" id="graphWrapper3" >
+                    <div class="graph" id="graph3" onclick="graphSelected(event, populateGraph1, resizeGraph2, populateGraph3)"></div>
                     <div class="graph-description" id="graph-3-description">
                         <h3 class="graph-title" id="graph-3-title"></h3>
                         <p class="graph-text" id="graph-3-text"></p>
-                    </div>
-                </div>
-                <div class="graph-wrapper" id="graphWrapper4" onclick="graphSelected(event)">
-                    <div class="graph" id="graph4"></div>
-                    <div class="graph-description" id="graph-4-description">
-                        <h3 class="graph-title" id="graph-4-title"></h3>
-                        <p class="graph-text" id="graph-4-text"></p>
-                    </div>
-                </div>
-                <div class="graph-wrapper" id="graphWrapper5" onclick="graphSelected(event)">
-                    <div class="graph" id="graph5"></div>
-                    <div class="graph-description" id="graph-5-description">
-                        <h3 class="graph-title" id="graph-5-title"></h3>
-                        <p class="graph-text" id="graph-5-text"></p>
-                    </div>
-                </div>
-                <div class="graph-wrapper" id="graphWrapper6" onclick="graphSelected(event)">
-                    <div class="graph" id="graph6"></div>
-                    <div class="graph-description" id="graph-6-description">
-                        <h3 class="graph-title" id="graph-6-title"></h3>
-                        <p class="graph-text" id="graph-6-text"></p>
                     </div>
                 </div>
             </div>
@@ -102,7 +89,11 @@
                 </div>
             </div>
         </div>
-        <script src="./../leaflet-map.js"></script>
+        <!-- Graph Generating JS Imports -->
         <script src="./init-code.js"></script>
+        <script src="./../leaflet-map.js"></script>
+        <script src="./../Alec-Graphs/alec-graphs.js"></script>
+        <script src="./../Don/plots.js"></script>
+        <script src="./../Marc-Graphs/marc-graphs.js"></script>
     </body>
 </html>

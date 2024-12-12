@@ -7,7 +7,12 @@ let selectedGraphDesc = ""
 let previousX = 0;
 let previousY = 0;
 
-function containerSwap(refreshFunction) {
+let globalSelectedGraph = ""
+
+function getGlobalSelectedGraph() { return globalSelectedGraph; }
+function getViewType() { return viewType; }
+
+function containerSwap(refreshFunction, populateGraph1, populateGraph2, populateGraph3) {
     const graphContainerElement = document.getElementById("graph-view")
     const leafletContainerElement = document.getElementById("leaflet-view")
     const animationCover = document.getElementsByClassName("animation-cover")[0];
@@ -61,19 +66,32 @@ function containerSwap(refreshFunction) {
             switchShuttle.id = "";
 
             processRunning = false;
+
+            if      (globalSelectedGraph === 'graph1') { populateGraph1(true); }
+            else if (globalSelectedGraph === 'graph2') { populateGraph2(true); }
+            else if (globalSelectedGraph === 'graph3') { populateGraph3(true); }
+            else {
+                populateGraph1(true);
+                populateGraph2(true);
+                populateGraph3(true);
+            }
         }, animationTime * 2)
     }
 }
 
-function graphSelected(event) {
-    const target = event.target;
-    const targetId = target.id;
+function graphSelected(event, populateGraph1, populateGraph2, populateGraph3) {
+    let targetGraph = event.target;
+    targetGraph = (targetGraph.tagName == "svg" || targetGraph.tagName == "CANVAS") ? targetGraph.parentElement : targetGraph.parentElement.parentElement
 
-    const targetGraph = target.children[0];
-    const targetGraphDesc = target.children[1]
     const graphId = targetGraph.id;
-    const descId = targetGraphDesc.id;
 
+    const targetIdNum = targetGraph.id.charAt(targetGraph.id.length - 1)
+
+    const targetId = (graphId === "graph-active") ? "graph-wrapper-active" : `graphWrapper${targetIdNum}`;
+    const target = document.getElementById(targetId)
+
+    const descId = (graphId === "graph-active") ? "graph-description-active" : `graph-${targetIdNum}-description`;
+    const targetGraphDesc =  document.getElementById(descId)
 
     if (targetId === "graph-wrapper-active") {
         const animationCover = document.getElementsByClassName("animation-cover")[0];
@@ -84,9 +102,6 @@ function graphSelected(event) {
             if (selectedGraph !== "graph1") { document.getElementById("graphWrapper1").style.display = "" }
             if (selectedGraph !== "graph2") { document.getElementById("graphWrapper2").style.display = "" }
             if (selectedGraph !== "graph3") { document.getElementById("graphWrapper3").style.display = "" }
-            if (selectedGraph !== "graph4") { document.getElementById("graphWrapper4").style.display = "" }
-            if (selectedGraph !== "graph5") { document.getElementById("graphWrapper5").style.display = "" }
-            if (selectedGraph !== "graph6") { document.getElementById("graphWrapper6").style.display = "" }
 
             target.style.position = "";
             target.style.left = "";
@@ -100,6 +115,8 @@ function graphSelected(event) {
             selectedGraph = "";
             selectedGraphDesc = "";
 
+            globalSelectedGraph = "";
+
         }, animationTime)
 
         setTimeout(() => {
@@ -112,6 +129,8 @@ function graphSelected(event) {
         selectedGraphWrapper = targetId;
         selectedGraph = graphId;
         selectedGraphDesc = descId;
+
+        globalSelectedGraph = selectedGraph;
         
         target.style.position = "absolute";
         target.style.left = targetChildPosition.x;
@@ -120,12 +139,21 @@ function graphSelected(event) {
         if (graphId !== "graph1") { document.getElementById("graphWrapper1").style.display = "none" }
         if (graphId !== "graph2") { document.getElementById("graphWrapper2").style.display = "none" }
         if (graphId !== "graph3") { document.getElementById("graphWrapper3").style.display = "none" }
-        if (graphId !== "graph4") { document.getElementById("graphWrapper4").style.display = "none" }
-        if (graphId !== "graph5") { document.getElementById("graphWrapper5").style.display = "none" }
-        if (graphId !== "graph6") { document.getElementById("graphWrapper6").style.display = "none" }
 
         target.id = "graph-wrapper-active";
         targetGraph.id = "graph-active";
         targetGraphDesc.id = "graph-description-active";
     }
+
+    setTimeout(() => {
+        if (viewType === "leaflet-view") {}
+        else if (globalSelectedGraph === 'graph1') { populateGraph1(true); }
+        else if (globalSelectedGraph === 'graph2') { populateGraph2(true); }
+        else if (globalSelectedGraph === 'graph3') { populateGraph3(true); }
+        else {
+            populateGraph1(true);
+            populateGraph2(true);
+            populateGraph3(true);
+        }
+    }, animationTime)
 }

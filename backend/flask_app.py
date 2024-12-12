@@ -1,7 +1,7 @@
 # Imports
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
-from sqlalchemy import create_engine, func, desc
+from sqlalchemy import create_engine, func, desc, extract
 from flask import Flask, jsonify
 
 app = Flask(__name__)
@@ -31,24 +31,54 @@ airport_limit = "All Airports"
 def home():
     return("Welcome to the home page")
 
+# Got the idea to add the "Access-Control-Allow-Origin" header from user 'Salvador Dali' on this StackOverflow article
+# https://stackoverflow.com/questions/26980713/solve-cross-origin-resource-sharing-with-flask
+
 # Updating dropdown values so that we can change queries based on their output
 @app.route("/update_dropdown_1/<update_value>")
 def update_dropdown_1(update_value):
     global dropdown_1_value
     dropdown_1_value = update_value
-    return "Valid Request"
+
+    output = jsonify({ "response" : "200 - OK" })
+    output.headers.add('Access-Control-Allow-Origin', '*')
+    return output
 
 @app.route("/update_dropdown_2/<update_value>")
 def update_dropdown_2(update_value):
     global dropdown_2_value
     dropdown_2_value = update_value
-    return "Valid Request"
+    
+    output = jsonify({ "response" : "200 - OK" })
+    output.headers.add('Access-Control-Allow-Origin', '*')
+    return output
 
 @app.route("/update_dropdown_3/<update_value>")
 def update_dropdown_3(update_value):
     global dropdown_3_value
     dropdown_3_value = update_value
-    return "Valid Request"
+    
+    output = jsonify({ "response" : "200 - OK" })
+    output.headers.add('Access-Control-Allow-Origin', '*')
+    return output
+
+@app.route("/update_selected_area/<area>")
+def update_selected_area(area):
+    global selected_area
+    selected_area = area
+    
+    output = jsonify({ "response" : "200 - OK" })
+    output.headers.add('Access-Control-Allow-Origin', '*')
+    return output
+
+@app.route("/update_airport_limit/<limit>")
+def update_airport_limit(limit):
+    global airport_limit
+    airport_limit = limit
+    
+    output = jsonify({ "response" : "200 - OK" })
+    output.headers.add('Access-Control-Allow-Origin', '*')
+    return output
 
 @app.route("/strikes-by-airport")
 def strikes_by_airport():
@@ -100,12 +130,6 @@ def strikes_by_airport():
     output.headers.add('Access-Control-Allow-Origin', '*')
 
     return output
-
-@app.route("/update_selected_area/<area>")
-def update_selected_area(area):
-    global selected_area
-    selected_area = area
-    return "Valid Request"
       
 @app.route("/state_center_zoom")
 def state_center_zoom():
@@ -171,12 +195,137 @@ def state_center_zoom():
 
     return output
 
-@app.route("/update_airport_limit/<new_val>")
-def update_airport_limit(new_val):
+# Alecs Flask API Endpoint
+@app.route("/grouped-bar-data")
+def grouped_bar_data():
+    global selected_area
     global airport_limit
 
-    airport_limit = new_val
-    return "Valid Request"
+    session = Session(engine)
 
+    query_result = []
+
+    if (airport_limit == "All Airports"):
+        query_result = session\
+            .query(Birdstrikes.DAMAGE_LEVEL, Birdstrikes.SIZE,  func.count(Birdstrikes.INDEX_NR).label("frequency"), Birdstrikes.STATE)\
+            .filter(Birdstrikes.DAMAGE_LEVEL != "No Damage")\
+            .filter(Birdstrikes.DAMAGE_LEVEL != "Unknown Damage")
+    else:
+        query_result = session\
+            .query(Birdstrikes.DAMAGE_LEVEL, Birdstrikes.SIZE,  func.count(Birdstrikes.INDEX_NR).label("frequency"), Birdstrikes.STATE)\
+            .filter(Birdstrikes.DAMAGE_LEVEL != "No Damage")\
+            .filter(Birdstrikes.DAMAGE_LEVEL != "Unknown Damage")\
+            .filter(Birdstrikes.AIRPORT == Airports.AIRPORT)\
+            .filter(Airports.RANKING < airport_limit)
+       
+    if (selected_area == "All States"):
+        # Query data grouped by damage level and size
+        query_result = query_result\
+            .group_by(Birdstrikes.DAMAGE_LEVEL, Birdstrikes.SIZE)\
+            .all()
+    else:
+        # Query data grouped by damage level and size
+        query_result = query_result\
+            .filter(Birdstrikes.STATE == selected_area)\
+            .group_by(Birdstrikes.DAMAGE_LEVEL, Birdstrikes.SIZE)\
+            .all()
+
+    # Exclude 'No Damage' and 'Unknown Damage'
+    output = jsonify([{
+        "damage_level": row[0],
+        "size": row[1],
+        "frequency": row[2],
+    } for row in query_result])
+
+    session.close()
+
+    output.headers.add('Access-Control-Allow-Origin', '*')
+
+    return output
+
+@app.route("/incidents_per_aircraft")
+def incidents_per_aircraft():
+    global selected_area
+    global airport_limit
+    
+    session = Session(engine)
+    
+    query_result = []
+
+    if (airport_limit == "All Airports"):
+        query_result = session\
+            .query(Birdstrikes.AIRCRAFT, func.count(Birdstrikes.INDEX_NR))\
+            .where(Birdstrikes.AIRCRAFT.isnot(None))
+    else:
+        query_result = session\
+            .query(Birdstrikes.AIRCRAFT, func.count(Birdstrikes.INDEX_NR))\
+            .where(Birdstrikes.AIRCRAFT.isnot(None))\
+            .filter(Birdstrikes.AIRPORT == Airports.AIRPORT)\
+            .filter(Airports.RANKING < airport_limit)
+            
+            
+    if (selected_area == "All States"):
+        query_result = query_result\
+            .group_by(Birdstrikes.AIRCRAFT)\
+            .order_by(Birdstrikes.AIRCRAFT)\
+            .all()
+    else:
+        query_result = query_result\
+            .filter(Birdstrikes.STATE == selected_area)\
+            .group_by(Birdstrikes.AIRCRAFT)\
+            .order_by(Birdstrikes.AIRCRAFT)\
+            .all()
+        
+    session.close()
+
+    output = jsonify([{
+        "aircraft" : row[0],
+        "count"    : row[1]
+    } for row in query_result])
+
+    output.headers.add('Access-Control-Allow-Origin', '*')
+
+    return output
+
+
+@app.route("/graph_data/graph_2")
+def graph_2_data():
+    global selected_area
+    global airport_limit
+
+    session = Session(engine)
+
+    query_result = []
+
+    if (airport_limit == "All Airports"):
+        query_result = session\
+            .query(func.count(Birdstrikes.INDEX_NR), extract('month', func.date(Birdstrikes.INCIDENT_DATE)))
+    else:
+        query_result = session\
+            .query(func.count(Birdstrikes.INDEX_NR), extract('month', func.date(Birdstrikes.INCIDENT_DATE)))\
+            .filter(Birdstrikes.AIRPORT == Airports.AIRPORT)\
+            .filter(Airports.RANKING < airport_limit)
+
+    if (selected_area == "All States"):
+        query_result = query_result\
+            .group_by(extract('month', func.date(Birdstrikes.INCIDENT_DATE)))\
+            .all()
+    else:
+        query_result = query_result\
+            .filter(Birdstrikes.STATE == selected_area)\
+            .group_by(extract('month', func.date(Birdstrikes.INCIDENT_DATE)))\
+            .all()
+
+    session.close()
+
+    output = jsonify([{
+        "month" : row[1],
+        "count" : row[0]
+    } for row in query_result])
+
+    output.headers.add('Access-Control-Allow-Origin', '*')
+
+    return output
+    
 if __name__ == "__main__":
 	app.run(debug=True)

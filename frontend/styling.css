@@ -21,32 +21,65 @@ body {
     --footer-height : 10vh;
 
     /* Information selector properties */
-    --selector-height : 80vh;
+    --selector-height : 70vh;
     --selector-width : 20vw;
+
+    /* Border Radius Properties */
+    --border-radius-small : 10px;
+    --border-radius-medium : 20px;
 
     /* View Switch Properties */
     --view-switch-width : 3.5vw;
     --view-switch-height : 4.5vh;
+    --view-switch-border-radius : calc(var(--view-switch-height) / 2);
+
     --view-switch-shuttle-dim : 3vh;
+    --view-switch-shuttle-border-radius : calc(var(--view-switch-shuttle-dim) / 2);
+
+    --view-switch-offset : 10.25vw;
+    --view-switch-offset-active : 12.25vw;
+
+    /* Animation Cover Properties */
+    --animation-cover-offset : calc(var(--selector-width) + 4 * var(--medium-hor-space));
+    --animation-cover-width-active : calc(var(--graph-container-width) + (2 * var(--medium-hor-space)));
 
     /* Dropdown Wrapper Properties */
-    --dropdown-wrapper-height : 37.5vh;
+    --dropdown-wrapper-height : 25vh;
     --dropdown-wrapper-width : 16vw;
 
     /* Dropdown Menu Properties */
     --dropdown-height : 7.5vh;
     --dropdown-width : 16vw;
 
+    /* Animation Properties */
+    --animation-length-short : 0.25s;
+    --animation-length-medium : 1s;
+    --animation-length-long : 2s;
+
     /* Graph Container Properties */
     --graph-container-height : 90vh;
     --graph-container-width : calc(100vw - var(--selector-width) - (2 * var(--medium-hor-space)) - 6vw);
 
+    --leaflet-wrapper-height : calc(var(--graph-container-height) - 4 * var(--medium-ver-space));
+    --leaflet-wrapper-width : calc(var(--graph-container-width) - (2 * var(--medium-hor-space)));
+
     /* Graph wrapper properties */
     --graph-wrapper-height : 28vh;
-    --graph-wrapper-width : 35vw; 
+    --graph-wrapper-width : 70vw; 
+    --graph-wrapper-animation-offset : calc(var(--selector-width) + (4 * var(--medium-hor-space)));
 
     /* Graph properties */
     --graph-height : calc(var(--graph-wrapper-height) - 4vh);
+    --graph-width  : calc(var(--graph-wrapper-height) * 2);
+    
+    --graph-height-active : calc(3 * var(--graph-wrapper-height));
+    --graph-width-active :  var(--graph-height-active);
+
+    /* Graph Description Properties */
+    --graph-description-width : calc(var(--graph-wrapper-width) - var(--graph-width) - (4 * var(--medium-hor-space)));
+    --graph-description-width-active : calc(var(--graph-container-width) - (3 * var(--graph-wrapper-height)) - (3 * var(--medium-hor-space)));
+    --graph-description-text-height : calc(var(--graph-height) - (2 * var(--medium-ver-space)));
+    --graph-description-title-height : calc(2 * var(--medium-hor-space));
     
     /* Default text properties */
     .header-text {
@@ -92,7 +125,7 @@ body {
         justify-content : space-between;
 
         /* Shape And Color Information */
-        border-radius : 20px;
+        border-radius : var(--border-radius-medium);
         background-color : var(--emphasis-color-1);
     }
 
@@ -125,7 +158,7 @@ body {
 
     /* Shape And Color Information */
     background-color : var(--emphasis-color-3);
-    border-radius : calc(var(--view-switch-height) / 2);
+    border-radius : var(--view-switch-border-radius);
 }
 
 .view-switch-gutter:hover {
@@ -141,38 +174,38 @@ body {
     width : var(--view-switch-shuttle-dim);
     
     background-color : white;
-    border-radius : calc(var(--view-switch-shuttle-dim) / 2);
+    border-radius : var(--view-switch-shuttle-border-radius);
 }
 
 #view-switch-shuttle-active {
     animation-name : view-switch-shuttle-active;
-    animation-duration : 0.25s;
+    animation-duration : var(--animation-length-short);
     animation-iteration-count: 1;
     animation-fill-mode : forwards;
 }
 
 @keyframes view-switch-shuttle-active {
     0% {
-        left : 10.25vw;
+        left : var(--view-switch-offset);
     }
     100% {
-        left : 12.25vw;
+        left : var(--view-switch-offset-active);
     }
 }
 
 #view-switch-shuttle-inactive {
     animation-name : view-switch-shuttle-inactive;
-    animation-duration : 0.25s;
+    animation-duration : var(--animation-length-short);
     animation-iteration-count: 1;
     animation-fill-mode : forwards;
 }
 
 @keyframes view-switch-shuttle-inactive {
     0% {
-        left : 12.25vw;
+        left : var(--view-switch-offset-active);
     }
     100% {
-        left : 10.25vw;
+        left : var(--view-switch-offset);
     }
 }
 
@@ -202,7 +235,7 @@ body {
 
     /* Shape And Color Information */
     background-color : var(--emphasis-color-3);
-    border-radius : 10px;
+    border-radius : var(--border-radius-small);
     text-align : center;
 }
 
@@ -218,10 +251,10 @@ body {
 
     /* Shape And Color Information */
     background-color : var(--emphasis-color-2);
-    border-radius : 10px;
+    border-radius : var(--border-radius-small);
 
     p {
-        height : calc(var(--graph-height) - (2 * var(--medium-ver-space)));
+        height : var(--graph-description-text-height);
 
         overflow : hidden;
 
@@ -229,7 +262,7 @@ body {
     }
 
     h3 {
-        height : calc(2 * var(--medium-hor-space));
+        height : var(--graph-description-title-height);
 
         margin : 0 0 0 0;
     }
@@ -239,8 +272,8 @@ body {
     /* Content Placement Information */
     z-index : 100;
 
-    animation-duration: 1s;
     animation-name: graph-wrapper-active;
+    animation-duration: var(--animation-length-medium);
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
 }
@@ -250,7 +283,7 @@ body {
     100% {
         height : var(--graph-container-height);
         width : var(--graph-container-width);
-        left : calc(var(--selector-width) + (4 * var(--medium-hor-space)));
+        left : var(--graph-wrapper-animation-offset);
         top : 5vh;
     }
 }
@@ -258,15 +291,17 @@ body {
 .graph {
     /* Sizing Information */
     height : var(--graph-height);
-    width : var(--graph-height);
+    width : var(--graph-width);
     margin : 0 var(--medium-hor-space);
 
-    background-color : red;
+    overflow : hidden;
+
+    background-color : var(--emphasis-color-3);
 }
 
 #graph-active {
     animation-name : graph-active;
-    animation-duration : 1s;
+    animation-duration : var(--animation-length-medium);
     animation-iteration-count: 1;
     animation-fill-mode : forwards;
 }
@@ -274,21 +309,38 @@ body {
 @keyframes graph-active {
     0% {}
     100% {
-        height : calc(3 * var(--graph-wrapper-height));
-        width :  calc(3 * var(--graph-wrapper-height));
+        height : var(--graph-height-active);
+        width :  var(--graph-width-active);
     }
 }
 
+.graphCanvas {
+    /* Sizing Information */
+    height : var(--graph-height);
+    width : var(--graph-width);
+}
+
 .graph-description {
-    width : calc(var(--graph-wrapper-width) - var(--graph-height) - (4 * var(--medium-hor-space)));
+    /* Sizing Information */
+    width : var(--graph-description-width);
+    
+    .dropdown {
+        margin-top : var(--large-hor-space);
+        display : none;
+    }
 }
 
 #graph-description-active {
     /* Sizing Information */
-    width : calc(var(--graph-container-width) - (3 * var(--graph-wrapper-height)) - (3 * var(--medium-hor-space)));
+    width : var(--graph-description-width-active);
 
     /* Content Placement Information */
     align-items : center;
+    justify-items : center;
+
+    .dropdown {
+        display : flex;
+    }
 
     h3 {
         text-align : center;
@@ -297,11 +349,11 @@ body {
 
 #leaflet-wrapper {
     /* Sizing Information */
-    height : calc(var(--graph-container-height) - 4 * var(--medium-ver-space));
-    width : calc(var(--graph-container-width) - (2 * var(--medium-hor-space)));
+    height : var(--leaflet-wrapper-height);
+    width : var(--leaflet-wrapper-width);
 
     /* Shape And Color Information */
-    border-radius : 20px;
+    border-radius : var(--border-radius-medium);
 }
 
 #graph-view {
@@ -311,7 +363,7 @@ body {
 #leaflet-view {
     /* Shape And Color Information */
     background-color : var(--emphasis-color-2);
-    border-radius : 20px;
+    border-radius : var(--border-radius-medium);
 
     /* Content Placement Information */
     display : none;
@@ -328,21 +380,22 @@ body {
 
     /* Content Placement Information */
     position : absolute;
-    left : calc(var(--selector-width) + 4 * var(--medium-hor-space));
+    left : var(--animation-cover-offset);
     z-index : 10000;
 }
 
 #animation-cover-active {
     animation-name: animation-cover-active;
-    animation-duration: 2s;
+    animation-duration: var(--animation-length-long);
     animation-iteration-count: 1;
 }
 
 @keyframes animation-cover-active {
-    0%    { width : 0vw;                          }
-    50%   { width : calc(var(--graph-container-width) + (2 * var(--medium-hor-space))); }
-    100%  { width : 0vw;                          }    
+    0%    { width : 0vw;                                }     
+    50%   { width : var(--animation-cover-width-active) }
+    100%  { width : 0vw;                                }    
 }
+
 
 
 .footer-wrapper {
