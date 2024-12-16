@@ -34,7 +34,7 @@ d3.json(strike_count_url).then((data) => {
             <div class="popup_row"><h3>Number Of Strikes : </h3><p> ${strike["strike_count"]}</p></div>
             <div class="popup_row"><h3>Latitude : </h3><p> ${strike["latitude"]}</p></div>
             <div class="popup_row"><h3>Longitude : </h3><p> ${strike["longitude"]}</p></div>
-        `)
+        `, {maxWidth : 'fit-content'})
 
         bubbleArray.push(bubble)
     }
@@ -81,7 +81,7 @@ function updateMapBubbles() {
                 <div class="popup_row"><h3>Number Of Strikes : </h3><p> ${strike["strike_count"]}</p></div>
                 <div class="popup_row"><h3>Latitude : </h3><p> ${strike["latitude"]}</p></div>
                 <div class="popup_row"><h3>Longitude : </h3><p> ${strike["longitude"]}</p></div>
-            `)
+            `, {maxWidth : 'fit-content'})
     
             bubbleArray.push(bubble)
         }

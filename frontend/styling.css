@@ -222,7 +222,6 @@ body {
 }
 
 .dropdown-title-wrapper {
-
     h3 {
         margin : 0 0;
         text-align : center;
@@ -238,6 +237,8 @@ body {
     background-color : var(--emphasis-color-3);
     border-radius : var(--border-radius-small);
     text-align : center;
+
+    font-weight : bolder;
 }
 
 .graph-wrapper {
@@ -406,13 +407,18 @@ body {
     flex-direction : row;
 
     h3 {
+        height : 3vh;
         width : 10vw;
         margin-right : var(--small-hor-space);
+
+        overflow : hidden;
+        white-space: nowrap;
+        text-overflow : ellipsis;
     }
 
     p {
-        width : 10vw;
         height : 2vh;
+        max-width : 10vw;
 
         overflow : hidden;
         white-space: nowrap;
