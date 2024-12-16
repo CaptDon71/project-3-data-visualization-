@@ -80,8 +80,8 @@ function containerSwap(refreshFunction, populateGraph1, populateGraph2, populate
 }
 
 function graphSelected(event, populateGraph1, populateGraph2, populateGraph3) {
-    let targetGraph = event.target;
-    targetGraph = (targetGraph.tagName == "svg" || targetGraph.tagName == "CANVAS") ? targetGraph.parentElement : targetGraph.parentElement.parentElement
+    const targetGraphCover = event.target
+    const targetGraph = targetGraphCover.nextElementSibling;
 
     const graphId = targetGraph.id;
 
@@ -107,6 +107,7 @@ function graphSelected(event, populateGraph1, populateGraph2, populateGraph3) {
             target.style.left = "";
             target.style.top = "";
 
+            targetGraphCover.id = "";
             target.id = selectedGraphWrapper;
             targetGraph.id = selectedGraph;
             targetGraphDesc.id = selectedGraphDesc
@@ -116,7 +117,6 @@ function graphSelected(event, populateGraph1, populateGraph2, populateGraph3) {
             selectedGraphDesc = "";
 
             globalSelectedGraph = "";
-
         }, animationTime)
 
         setTimeout(() => {
@@ -140,12 +140,18 @@ function graphSelected(event, populateGraph1, populateGraph2, populateGraph3) {
         if (graphId !== "graph2") { document.getElementById("graphWrapper2").style.display = "none" }
         if (graphId !== "graph3") { document.getElementById("graphWrapper3").style.display = "none" }
 
+        targetGraphCover.id = "graph-cover-active"
         target.id = "graph-wrapper-active";
         targetGraph.id = "graph-active";
         targetGraphDesc.id = "graph-description-active";
+
+        setTimeout(() => {
+            target.style.animationDuration = "0s";
+        }, 1000)
     }
 
     setTimeout(() => {
+        console.log(globalSelectedGraph)
         if (viewType === "leaflet-view") {}
         else if (globalSelectedGraph === 'graph1') { populateGraph1(true); }
         else if (globalSelectedGraph === 'graph2') { populateGraph2(true); }
@@ -157,3 +163,4 @@ function graphSelected(event, populateGraph1, populateGraph2, populateGraph3) {
         }
     }, animationTime)
 }
+

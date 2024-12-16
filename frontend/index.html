@@ -44,7 +44,8 @@
             <div class="animation-cover"></div>
             <div class="graph-container" id="graph-view">
                 <div class="graph-wrapper" id="graphWrapper1">
-                    <div class="graph" id="graph1" onclick="graphSelected(event, populateGraph1, resizeGraph2, populateGraph3)">
+                    <div class="graph-cover" id="graphCover1" onclick="graphSelected(event, populateGraph1, resizeGraph2, populateGraph3)"></div>
+                    <div class="graph" id="graph1">
                         <canvas class="graphCanvas"></canvas>
                     </div>
                     <div class="graph-description" id="graph-1-description">
@@ -63,14 +64,16 @@
                     </div>
                 </div>
                 <div class="graph-wrapper" id="graphWrapper2">
-                    <div class="graph" id="graph2" onclick="graphSelected(event, populateGraph1, resizeGraph2, populateGraph3)"></div>
+                    <div class="graph-cover" id="graphCover2" onclick="graphSelected(event, populateGraph1, resizeGraph2, populateGraph3)"></div>
+                    <div class="graph" id="graph2"></div>
                     <div class="graph-description" id="graph-2-description">
                         <h3 class="graph-title" id="graph-2-title"></h3>
                         <p class="graph-text" id="graph-2-text"></p>
                     </div>
                 </div>
                 <div class="graph-wrapper" id="graphWrapper3" >
-                    <div class="graph" id="graph3" onclick="graphSelected(event, populateGraph1, resizeGraph2, populateGraph3)"></div>
+                    <div class="graph-cover" id="graphCover3" onclick="graphSelected(event, populateGraph1, resizeGraph2, populateGraph3)"></div>
+                    <div class="graph" id="graph3"></div>
                     <div class="graph-description" id="graph-3-description">
                         <h3 class="graph-title" id="graph-3-title"></h3>
                         <p class="graph-text" id="graph-3-text"></p>

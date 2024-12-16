@@ -5,41 +5,43 @@ function onSelector1Change(event, updateMapLocation, updateMapBubbles, populateG
     const updated_area = event.target.value;
     const viewType = getViewType()
     
-    fetch(selector1UpdateURL + updated_area)
+    fetch(selector1UpdateURL + updated_area).then(() => {
+        console.log(updated_area)
 
-    selectedGraph = getGlobalSelectedGraph()
+        selectedGraph = getGlobalSelectedGraph()
 
-    if (viewType === "leaflet-view") {}
-    else if (selectedGraph === 'graph1') { populateGraph1(true); }
-    else if (selectedGraph === 'graph2') { populateGraph2(true); }
-    else if (selectedGraph === 'graph3') { populateGraph3(true); }
-    else {
-        populateGraph1(true);
-        populateGraph2(true);
-        populateGraph3(true);
-    }
+        if (viewType === "leaflet-view") {}
+        else if (selectedGraph === 'graph1') { populateGraph1(true); }
+        else if (selectedGraph === 'graph2') { populateGraph2(true); }
+        else if (selectedGraph === 'graph3') { populateGraph3(true); }
+        else {
+            populateGraph1(true);
+            populateGraph2(true);
+            populateGraph3(true);
+        }
 
-    updateMapBubbles()
-    updateMapLocation()
+        updateMapBubbles()
+        updateMapLocation()
+    })
 }
 
 function onSelector2Change(event, updateMapBubbles, populateGraph1, populateGraph2, populateGraph3) {
     const update_limit = event.target.value
     const viewType = getViewType()
         
-    fetch(selector2UpdateURL + update_limit)
+    fetch(selector2UpdateURL + update_limit).then(() => {
+        selectedGraph = getGlobalSelectedGraph()
 
-    selectedGraph = getGlobalSelectedGraph()
+        if (viewType === "leaflet-view") {}
+        else if (selectedGraph === 'graph1') { populateGraph1(true); }
+        else if (selectedGraph === 'graph2') { populateGraph2(true); }
+        else if (selectedGraph === 'graph3') { populateGraph3(true); }
+        else {
+            populateGraph1(true);
+            populateGraph2(true);
+            populateGraph3(true);
+        }
 
-    if (viewType === "leaflet-view") {}
-    else if (selectedGraph === 'graph1') { populateGraph1(true); }
-    else if (selectedGraph === 'graph2') { populateGraph2(true); }
-    else if (selectedGraph === 'graph3') { populateGraph3(true); }
-    else {
-        populateGraph1(true);
-        populateGraph2(true);
-        populateGraph3(true);
-    }
-
-    updateMapBubbles()
+        updateMapBubbles()
+    })
 }

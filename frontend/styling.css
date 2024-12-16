@@ -53,7 +53,8 @@ body {
 
     /* Animation Properties */
     --animation-length-short : 0.25s;
-    --animation-length-medium : 1s;
+    --animation-length-med-short : 1s;
+    --animation-length-medium : 1.5s;
     --animation-length-long : 2s;
 
     /* Graph Container Properties */
@@ -254,15 +255,20 @@ body {
     border-radius : var(--border-radius-small);
 
     p {
-        height : var(--graph-description-text-height);
+        max-height : var(--graph-description-text-height);
 
         overflow : hidden;
-
+                
         margin : 0 0 0 0;
     }
 
     h3 {
         height : var(--graph-description-title-height);
+
+        overflow : hidden;
+        white-space: nowrap;
+
+        text-overflow : ellipsis;
 
         margin : 0 0 0 0;
     }
@@ -273,9 +279,13 @@ body {
     z-index : 100;
 
     animation-name: graph-wrapper-active;
-    animation-duration: var(--animation-length-medium);
+    animation-duration: var(--animation-length-med-short);
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
+
+    h3 { 
+        width : 100%;
+    }
 }
 
 @keyframes graph-wrapper-active {
@@ -301,7 +311,7 @@ body {
 
 #graph-active {
     animation-name : graph-active;
-    animation-duration : var(--animation-length-medium);
+    animation-duration : var(--animation-length-med-short);
     animation-iteration-count: 1;
     animation-fill-mode : forwards;
 }
@@ -309,6 +319,40 @@ body {
 @keyframes graph-active {
     0% {}
     100% {
+        height : var(--graph-height-active);
+        width :  var(--graph-width-active);
+    }
+}
+
+.graph-cover {
+    height : var(--graph-height);
+    width : var(--graph-width);
+    margin : 0 var(--medium-hor-space);
+
+    background-color: var(--emphasis-color-3);
+    opacity : 0%;
+
+    position : absolute;
+
+    z-index : 9999;
+}
+
+#graph-cover-active {
+    animation-name : graph-cover-active;
+    animation-duration : var(--animation-length-medium);
+    animation-iteration-count: 1;
+    animation-fill-mode : forwards;
+}
+
+@keyframes graph-cover-active {
+    0% { opacity : 100%; }
+    66% {
+        opacity : 100%;
+        height : var(--graph-height-active);
+        width :  var(--graph-width-active);
+    }
+    100% {
+        opacity : 0%;
         height : var(--graph-height-active);
         width :  var(--graph-width-active);
     }
@@ -356,6 +400,26 @@ body {
     border-radius : var(--border-radius-medium);
 }
 
+.popup_row {
+    width : fit-content;
+    display : flex;
+    flex-direction : row;
+
+    h3 {
+        width : 10vw;
+        margin-right : var(--small-hor-space);
+    }
+
+    p {
+        width : 10vw;
+        height : 2vh;
+
+        overflow : hidden;
+        white-space: nowrap;
+        text-overflow : ellipsis;
+    }
+}
+
 #graph-view {
     flex-direction : column;
 }
@@ -395,8 +459,6 @@ body {
     50%   { width : var(--animation-cover-width-active) }
     100%  { width : 0vw;                                }    
 }
-
-
 
 .footer-wrapper {
     /* Sizing Information */

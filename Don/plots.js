@@ -60,6 +60,7 @@ d3.json(chart1APIUrl).then((data) => {
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      events : ['mousemove', 'mouseout', 'touchstart', 'touchmove'],
       scales: {
         y: {
           beginAtZero: true,

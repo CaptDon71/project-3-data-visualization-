@@ -29,7 +29,12 @@ d3.json(strike_count_url).then((data) => {
             radius : strike["strike_count"] * 25
         })
 
-        bubble.bindPopup(strike["airport_name"])
+        bubble.bindPopup(`
+            <div class="popup_row"><h3>Airport Name : </h3><p> ${strike["airport_name"]}</p></div>    
+            <div class="popup_row"><h3>Number Of Strikes : </h3><p> ${strike["strike_count"]}</p></div>
+            <div class="popup_row"><h3>Latitude : </h3><p> ${strike["latitude"]}</p></div>
+            <div class="popup_row"><h3>Longitude : </h3><p> ${strike["longitude"]}</p></div>
+        `)
 
         bubbleArray.push(bubble)
     }
@@ -57,9 +62,9 @@ function updateMapLocation() {
 }
 
 function updateMapBubbles() {
-    map.removeLayer(bubbleGroup)
-
     d3.json(strike_count_url).then((data) => {
+        map.removeLayer(bubbleGroup)
+        
         const bubbleArray = []
     
         for (strike of data) {
@@ -71,7 +76,12 @@ function updateMapBubbles() {
                 radius : strike["strike_count"] * 25
             })
     
-            bubble.bindPopup(strike["airport_name"])
+            bubble.bindPopup(`
+                <div class="popup_row"><h3>Airport Name : </h3><p> ${strike["airport_name"]}</p></div>    
+                <div class="popup_row"><h3>Number Of Strikes : </h3><p> ${strike["strike_count"]}</p></div>
+                <div class="popup_row"><h3>Latitude : </h3><p> ${strike["latitude"]}</p></div>
+                <div class="popup_row"><h3>Longitude : </h3><p> ${strike["longitude"]}</p></div>
+            `)
     
             bubbleArray.push(bubble)
         }

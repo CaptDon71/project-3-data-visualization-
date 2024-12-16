@@ -2,6 +2,8 @@ const graph2ApiEndpoint = "http://127.0.0.1:5000/graph_data/graph_2"
 
 const container2 = document.getElementById("graph2");
 
+let yData = [];
+
 populateGraph2(true)
 
 function populateGraph2(isDisplayed) {
@@ -26,19 +28,19 @@ function populateGraph2(isDisplayed) {
             "December"
         ];
 
-        let yData = [];
+        yData = []
 
         for (row of data) {
             yData.push(row["count"])
         };
 
-        console.log(xData)
-        console.log(yData)
-
         const dataWrapper = [{
             x : xData,
             y : yData,
-            type : "line"
+            type : "line",
+            mode: (isActive) ? 'lines+markers+text' : '',
+            text : (isActive) ? yData : [],
+            textposition : (isActive) ? 'bottom center' : ''
         }];
 
         const layout = {
@@ -72,6 +74,14 @@ function populateGraph2(isDisplayed) {
 function resizeGraph2(isDisplayed) {
     const isActive = (container2.id == "graph-active")
     const htmlId = (isActive) ? "graph-active" : "graph2";
+
+    const updateLayout = {
+        mode: (isActive) ? 'lines+markers+text' : '',
+        text : (isActive) ? [yData] : [],
+        textposition : (isActive) ? 'bottom center' : ''
+    }
+
+    Plotly.restyle(htmlId, updateLayout, [0])
 
     Plotly.Plots.resize(htmlId);
 }

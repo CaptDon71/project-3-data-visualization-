@@ -99,17 +99,17 @@ function populateGraph3(isDisplayed) {
             .text(d => d.frequency)
             .style("font-size", "10px")
             .style("fill", "black");
-        console.log([...groupedData]);
 
-        // Add legend
+            if (isActive) {
+                // Add legend
         const legend = svg.append("g")
         .attr("transform", `translate(50, -10)`); 
 
-// Data for the legend
+        // Data for the legend
         const legendData = ["Small", "Medium", "Large"];
         const legendColors = ["#1F77B4", "#FF7F0E", "#2CA02C"];
 
-// Add legend rectangles
+        // Add legend rectangles
         legend.selectAll("rect")
             .data(legendData)
             .enter()
@@ -120,7 +120,7 @@ function populateGraph3(isDisplayed) {
             .attr("height", 15)
             .attr("fill", (d, i) => legendColors[i]);
 
-// Add legend text
+        // Add legend text
         legend.selectAll("text")
             .data(legendData)
             .enter()
@@ -130,6 +130,6 @@ function populateGraph3(isDisplayed) {
             .text(d => d)
             .style("font-size", "12px")
             .attr("alignment-baseline", "middle");
-
+            }
     }) 
 }

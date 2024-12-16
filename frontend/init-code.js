@@ -6,16 +6,16 @@ fetch(initSelector2URL)
 
 const graphDescriptions = {
     "graph1" : {
-        "title" : "Placeholder Title",
-        "text" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in velit sed augue lacinia accumsan in eget augue. Mauris lacus urna, viverra eu porttitor in, varius et tellus. Mauris elementum rhoncus arcu, et pretium est euismod in. Morbi eu facilisis orci. Praesent id dolor nisi. Ut sodales leo quis convallis dapibus. Curabitur eget vulputate ante. Duis sapien ligula, ullamcorper nec nunc nec, efficitur efficitur sem. Duis vel risus ut nibh accumsan vestibulum. Phasellus porttitor eros enim, sed aliquam augue accumsan ut. Aliquam sollicitudin sem id risus euismod volutpat. Proin hendrerit est at laoreet venenatis. Cras ultricies orci varius orci interdum, nec eleifend ex porta. Fusce viverra tempus risus id iaculis. Phasellus sollicitudin venenatis condimentum. Aenean ut ultrices neque, vitae vestibulum massa."
+        "title" : "Aircraft Type and Bird Strike Incidents",
+        "text" : "This bar chart examines the relationship between aircraft types and bird strike incidents using FAA data. The analysis shows that larger, faster aircraft, such as the Airbus A320 and Boeing 737, experience higher numbers of bird strikes, with the A320 leading in incidents. In contrast, smaller aircraft generally encounter fewer strikes. These findings highlight opportunities for design enhancements, including informed aircraft model selection and engine modifications to reduce bird strike risks."
     },
     "graph2" : {
-        "title" : "Placeholder Title",
-        "text" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in velit sed augue lacinia accumsan in eget augue. Mauris lacus urna, viverra eu porttitor in, varius et tellus. Mauris elementum rhoncus arcu, et pretium est euismod in. Morbi eu facilisis orci. Praesent id dolor nisi. Ut sodales leo quis convallis dapibus. Curabitur eget vulputate ante. Duis sapien ligula, ullamcorper nec nunc nec, efficitur efficitur sem. Duis vel risus ut nibh accumsan vestibulum. Phasellus porttitor eros enim, sed aliquam augue accumsan ut. Aliquam sollicitudin sem id risus euismod volutpat. Proin hendrerit est at laoreet venenatis. Cras ultricies orci varius orci interdum, nec eleifend ex porta. Fusce viverra tempus risus id iaculis. Phasellus sollicitudin venenatis condimentum. Aenean ut ultrices neque, vitae vestibulum massa."
+        "title" : "Seasonal Trends of Bird Strikes by Month",
+        "text" : "The graph illustrates the monthly distribution of bird strikes, highlighting seasonal trends. It shows peak activity during migration periods, particularly in spring (April–May) and late summer to fall (August–October), with lower occurrences in winter months (December–February)"
     },
     "graph3" : {
-        "title" : "Placeholder Title",
-        "text" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in velit sed augue lacinia accumsan in eget augue. Mauris lacus urna, viverra eu porttitor in, varius et tellus. Mauris elementum rhoncus arcu, et pretium est euismod in. Morbi eu facilisis orci. Praesent id dolor nisi. Ut sodales leo quis convallis dapibus. Curabitur eget vulputate ante. Duis sapien ligula, ullamcorper nec nunc nec, efficitur efficitur sem. Duis vel risus ut nibh accumsan vestibulum. Phasellus porttitor eros enim, sed aliquam augue accumsan ut. Aliquam sollicitudin sem id risus euismod volutpat. Proin hendrerit est at laoreet venenatis. Cras ultricies orci varius orci interdum, nec eleifend ex porta. Fusce viverra tempus risus id iaculis. Phasellus sollicitudin venenatis condimentum. Aenean ut ultrices neque, vitae vestibulum massa."
+        "title" : "Number Of Birdstrikes In Each Damage Category By Aircraft Size",
+        "text" : "The chart shows that most bird strikes result in \"Minor Damage\". \"Aircraft Destroyed\" events are rare across all bird sizes. \"Substantial Damage\" happens more often. But, the data shows that you are pretty safe if your plane is hit."
     }
 }
 
@@ -51,7 +51,7 @@ const dropdown_1_values = {
     "IL" : [40.6331, -89.3985,  7],
     "IN" : [40.5512, -85.6024,  7],
     "IA" : [42.0167, -93.1635,  7],
-    "KA" : [39.0119, -98.4842,  7],
+    "KS" : [39.0119, -98.4842,  7],
     "KY" : [37.8393, -84.2700,  7],
     "LA" : [30.5191, -91.5209,  7],
     "ME" : [45.2538, -69.4455,  7],
@@ -81,8 +81,8 @@ const dropdown_1_values = {
     "TX" : [31.9686, -99.9018,  6],
     "UT" : [40.7607, -111.8939, 7],
     "VT" : [44.5588, -72.5778,  6],
-    "BA" : [37.4316, -78.6569,  7],
-    "WA" : [47.7511, -120.7401, 7],
+    "MA" : [37.4316, -78.6569,  7],
+    "VA" : [47.7511, -120.7401, 7],
     "WV" : [38.5976, -80.4549,  7],
     "WI" : [43.7844, -88.7879,  7],
     "WY" : [43.0760, -107.2903, 7]
@@ -122,3 +122,16 @@ for (limit of dropdown_2_values) {
     dropdown2.add(dropdown_option)
 }
 
+document.addEventListener("keydown", (event) => {
+    const key = event.key;
+
+    const graph = document.getElementById("graph-wrapper-active");
+    
+    if (graph) { document.getElementById("graph-cover-active").style.zIndex = -1; }
+})
+
+document.addEventListener("keyup", (event) => {
+    for (graph of document.getElementsByClassName("graph-cover")) {
+        graph.style.zIndex = ""
+    }
+})
