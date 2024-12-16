@@ -14,7 +14,7 @@ const graphDescriptions = {
         "text" : "The graph illustrates the monthly distribution of bird strikes, highlighting seasonal trends. It shows peak activity during migration periods, particularly in spring (April–May) and late summer to fall (August–October), with lower occurrences in winter months (December–February)"
     },
     "graph3" : {
-        "title" : "Number Of Birdstrikes In Each Damage Category By Aircraft Size",
+        "title" : "Number Of Birdstrikes In Each Damage Category By Bird Size",
         "text" : "The chart shows that most bird strikes result in \"Minor Damage\". \"Aircraft Destroyed\" events are rare across all bird sizes. \"Substantial Damage\" happens more often. But, the data shows that you are pretty safe if your plane is hit."
     }
 }

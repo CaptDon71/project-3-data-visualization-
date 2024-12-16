@@ -36,6 +36,11 @@ function populateGraph3(isDisplayed) {
         console.log(data)
         // Filter out null values
         const filteredData = data.filter(d => d.damage_level && d.size && d.frequency !== null);
+        const damageTotals = d3.rollup(
+            filteredData,
+            v => d3.sum(v, d => d.frequency), 
+            d => d.damage_level
+        );
         // Group data by damage level
         const groupedData = d3.group(filteredData, d => d.damage_level);
         const xOrder = ["Aircraft Destroyed", "Substantial Damage", "Minor Damage"];
@@ -100,10 +105,23 @@ function populateGraph3(isDisplayed) {
             .style("font-size", "10px")
             .style("fill", "black");
 
-            if (isActive) {
+
+        svg.selectAll(".total-label")
+            .data([...damageTotals])
+            .enter()
+            .append("text")
+            .attr("x", d => x0(d[0]) + x0.bandwidth() / 2) 
+            .attr("y", -5) 
+            .attr("text-anchor", "middle")
+            .text(d => `Total: ${d[1]}`) 
+            .style("font-size", "12px")
+            .style("fill", "black")
+            .attr("class", "total-label");
+
+            
                 // Add legend
         const legend = svg.append("g")
-        .attr("transform", `translate(50, -10)`); 
+        .attr("transform", `translate(25, 15)`); 
 
         // Data for the legend
         const legendData = ["Small", "Medium", "Large"];
@@ -114,8 +132,8 @@ function populateGraph3(isDisplayed) {
             .data(legendData)
             .enter()
             .append("rect")
-            .attr("x", (d, i) => i * 75) 
-            .attr("y", 0) 
+            .attr("x", 0)
+            .attr("y", (d, i) => i * 20)
             .attr("width", 15)
             .attr("height", 15)
             .attr("fill", (d, i) => legendColors[i]);
@@ -125,11 +143,11 @@ function populateGraph3(isDisplayed) {
             .data(legendData)
             .enter()
             .append("text")
-            .attr("x", (d, i) => i * 75 + 20) 
-            .attr("y", 12) 
+            .attr("x", 20) 
+            .attr("y", (d, i) => i * 20 + 12) 
             .text(d => d)
             .style("font-size", "12px")
             .attr("alignment-baseline", "middle");
-            }
+            
     }) 
 }
