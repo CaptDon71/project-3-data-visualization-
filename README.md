@@ -8,11 +8,11 @@ Bird strikes pose a significant threat to aviation safety, with potential risks 
 
 **Instructions**
 ---
-STEP 1: Launch the Flask App located at './backend/flask_app.py' (Note that this Flask app requires the use of the 'Flask' and 'SQLAlchemy' Python libraries)
-STEP 2: Launch the dashboard by running a local server using the './frontend/index.html' file (make sure the port this is being run on is different from the one the Flask app is running on). We used the 'Live Server' extension in VS Code to run the HTML code.
-STEP 3: Access the dashboard via your browser at the URL given to you by Live Server (by default it is http://127.0.0.1:5500/frontend/index.html)
-STEP 4: In the graph view, you can get a larger and more in depth version of each of the graphs by clicking on them (note that I am talking about the graph itself, and not its surrounding div. Clicking the surrounding div will do nothing). To exit out of the larger graph view, click the graph again. 
-STEP 5: For graph #1, if you need to see more information about each individual aircraft, you can hold the control key and hover over each bar to learn more information.
+1) Launch the Flask App located at './backend/flask_app.py' (Note that this Flask app requires the use of the 'Flask' and 'SQLAlchemy' Python libraries)
+2) Launch the dashboard by running a local server using the './frontend/index.html' file (make sure the port this is being run on is different from the one the Flask app is running on). We used the 'Live Server' extension in VS Code to run the HTML code.
+3) Access the dashboard via your browser at the URL given to you by Live Server (by default it is http://127.0.0.1:5500/frontend/index.html)
+4) In the graph view, you can get a larger and more in depth version of each of the graphs by clicking on them (note that I am talking about the graph itself, and not its surrounding div. Clicking the surrounding div will do nothing). To exit out of the larger graph view, click the graph again. 
+5) For graph #1, if you need to see more information about each individual aircraft, you can hold the control key and hover over each bar to learn more information.
 ---
 - **IMPORTANT** DO NOT change the options in the filters in quickly. Doing so will break the query system and mess up the graphs updating. Update one filter at a time, giving reasonable buffer room for the API to respond and the graphs to update with accurate information.
 - There are two views for this dashboard, a "graph view" that displays three graphs that analyze various parts of the data, and a "leaflet view" that displays a leaflet map of all of the airports in the dataset, with each airport being represented by a bubbles whose size is dictated by the total number of birdstrikes that occurred at that airport. The user can swap between these two options by hitting the switch below the two filters on the dashboard.
