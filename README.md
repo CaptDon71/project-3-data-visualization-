@@ -29,12 +29,13 @@ This project prioritized ethical considerations by utilizing anonymized FAA data
 
 **Outside Code Reference**
 ---
-The only outside code consulted during the creation of this project (other than code found in official documentation) is the code suggestion given by the user 'Salvador Dali' on the following Stack Overflow post(https://stackoverflow.com/questions/26980713/solve-cross-origin-resource-sharing-with-flask). This code was added to all of the endpoints of our Flask API so that our website could actually access and modify data contained in the API. (We added 'output.headers.add('Access-Control-Allow-Origin', '*');' to all of our flask endpoints).
+- The only outside code consulted during the creation of this project (other than code found in official documentation) is the code suggestion given by the user 'Salvador Dali' on the following Stack Overflow post(https://stackoverflow.com/questions/26980713/solve-cross-origin-resource-sharing-with-flask). This code was added to all of the endpoints of our Flask API so that our website could actually access and modify data contained in the API. (We added 'output.headers.add('Access-Control-Allow-Origin', '*');' to all of our flask endpoints).
+- Color palette from the following website : https://colorhunt.co/palette/89a8b2b3c8cfe5e1daf1f0e8 
 
 **Data Source Reference**  
 ---
-**Author:** The Federal Aviation Administration
-**Title:** FAA Wildlife Strike Database
-**Source:** wildlife.faa.gov
-**URL:** https://wildlife.faa.gov/search (We used the 'Download Excel' button to download the dataset)
-**Accessed:** 12/07/2024
+- **Author:** The Federal Aviation Administration
+- **Title:** FAA Wildlife Strike Database
+- **Source:** wildlife.faa.gov
+- **URL:** https://wildlife.faa.gov/search (We used the 'Download Excel' button to download the dataset)
+- **Accessed:** 12/07/2024

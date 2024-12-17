@@ -31,9 +31,6 @@ airport_limit = "All Airports"
 def home():
     return("Welcome to the home page")
 
-# Got the idea to add the "Access-Control-Allow-Origin" header from user 'Salvador Dali' on this StackOverflow article
-# 
-
 # Updating dropdown values so that we can change queries based on their output
 @app.route("/update_dropdown_1/<update_value>")
 def update_dropdown_1(update_value):

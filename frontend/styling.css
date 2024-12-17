@@ -1,7 +1,7 @@
 body {
     /* Standard values for the whole webapp */
     /* Color Vars */
-    /* Palette source - https://colorhunt.co/palette/89a8b2b3c8cfe5e1daf1f0e8 */
+    /* Palette source -  */
     --background-color : #F1F0E8;
     --emphasis-color-1 : #89A8B2;
     --emphasis-color-2 : #B3C8CF;
@@ -385,10 +385,6 @@ body {
 
     .dropdown {
         display : flex;
-    }
-
-    h3 {
-        text-align : center;
     }
 }
 
